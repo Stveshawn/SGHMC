@@ -15,7 +15,7 @@ np.random.seed(2019)
 data = np.random.normal(1, size = 10000)
 
 sig2_pos = 1/(1/1 + len(data) / np.cov(data))
-mean_pos = (0 + xx.mean()*len(data)/np.cov(data))/(1/1 +len(data) / np.cov(data))
+mean_pos = (0 + data.mean()*len(data)/np.cov(data))/(1/1 +len(data) / np.cov(data))
 dist = multivariate_normal(mean_pos, (sig2_pos))
 sim = dist.rvs(1000)
 
@@ -26,7 +26,7 @@ nsample = 1000
 niter = nburnin + nsample
 
 
-# U = lambda mu: mu**2/2 + sum([(x-mu)**2/2 for x in xx])
+# U = lambda mu: mu**2/2 + sum([(x-mu)**2/2 for x in data])
 U = lambda mu: mu**2/2 + np.sum((data-mu)**2/2)
 gradU = lambda mu, batch: mu + np.sum(mu-batch) * len(data) / len(batch)
 Vhat = lambda mu, batch: np.cov(mu-batch)
@@ -50,8 +50,8 @@ def SGHMC_update_1d(Vhat, gradU, p, r, eps = 0.01, L = 100, M_i = 1):
 
     for i in range(L):
         p = p + eps*M_i * r
-        idx = np.random.choice(len(xx), nbatch)
-        batch = xx[idx]
+        idx = np.random.choice(len(data), nbatch)
+        batch = data[idx]
         V = Vhat(p, batch)
         B = 1/2 * eps * V
         C = 3

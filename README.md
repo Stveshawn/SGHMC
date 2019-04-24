@@ -15,6 +15,6 @@ _This is the repository for the final project of STA 663 at Duke University, Dur
 
 # Note:
 
-The `C++` code depends on __Eigen__ library. To get everything to work out, please make sure you have eigen in the correct directory or you can download it by run the following line in terminal:
+The `C++` code depends on __Eigen__ library. To get everything to work out, please make sure you have eigen in the correct directory or you can download it by running the following line in terminal:
 
 `! git clone https://github.com/RLovelett/eigen.git`

@@ -21,7 +21,7 @@ sim = dist.rvs(1000)
 
 
 # Global parameters
-nburnin = 100
+nburnin = 500
 nsample = 1000
 niter = nburnin + nsample
 
@@ -60,11 +60,10 @@ def SGHMC_update_1d(Vhat, gradU, p, r, eps = 0.01, L = 100, M_i = 1):
 
 
 
-niter = 1100
 eps = 0.0001
 L = 100
 nbatch= 500
-np.random.seed(2019)
+np.random.seed(0)
 samples = np.zeros(niter+1)
 p = np.array([0.0])
 samples[0] = p
@@ -77,7 +76,7 @@ for k in range(niter):
     
     
 plt.figure(figsize=(10,6))
-sns.kdeplot(samples[100:], label = 'Samples with SGHMC')
+sns.kdeplot(samples[nburnin:], label = 'Samples with SGHMC')
 sns.kdeplot(sim, label = 'Samples with HMC')
 plt.title("SGHMC (univariate normal)");
 # plt.savefig('SGHMC_1d.png');
